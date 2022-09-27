@@ -20,7 +20,8 @@ abstract class BaseCommand extends Command
     protected function mapToPathname(array $files): array
     {
         return array_map(function (SplFileInfo $file) {
-            return $file->getRelativePathname();
+            //FIX / windows 
+            return str_replace('\\', '/', $file->getRelativePathname());
         }, $files);
     }
 }
