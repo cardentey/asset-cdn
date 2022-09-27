@@ -53,6 +53,9 @@ class SyncCommand extends BaseCommand
         $localFiles = $finder->getFiles();
         $filesToDelete = $this->filesToDelete($filesOnCdn, $localFiles);
         $filesToSync = $this->filesToSync($filesOnCdn, $localFiles);
+        
+        //no remove new files
+        $filesToDelete = $collection->intersect($filesToSync);
 
         foreach ($filesToSync as $file) {
             $bool = $this->filesystemManager
